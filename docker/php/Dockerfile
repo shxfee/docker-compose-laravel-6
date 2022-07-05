@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.3-fpm
 
 # Set working directory
 WORKDIR /var/www
@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     locales \
     zip \
+    libzip-dev \
     jpegoptim optipng pngquant gifsicle \
     vim \
     unzip \
@@ -20,17 +21,21 @@ RUN apt-get update && apt-get install -y \
     libmagickwand-dev --no-install-recommends
 
 # PHP Extensions
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath
+# for extension installation instructions check:
+# https://github.com/mlocati/docker-php-extension-installer
+# https://www.php.net/manual/en/zip.installation.php#123414
+ 
+RUN docker-php-ext-install pdo_mysql zip
 
 # ImageMagick - I prefer ImageMagick and ghostscript instead of gd.
 # If your choice is different, you may comment out the following section and uncomment GD section
-RUN apt-get install ghostscript -y \
-    && pecl install imagick \
-    && docker-php-ext-enable imagick
+# RUN apt-get install ghostscript -y \
+#     && pecl install imagick \
+#     && docker-php-ext-enable imagick
 
-# GD - Uncomment next 2 lines to enable gd image processing library
-# RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
-# RUN docker-php-ext-install gd
+# GD
+RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
+RUN docker-php-ext-install gd
 
 # composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -38,7 +43,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Nodejs - nodejs and npm
 # It's required for VueJS and Laravel-Mix
 RUN apt-get install gnupg -yq \
-    && curl -sL https://deb.nodesource.com/setup_8.x | bash \
+    && curl -sL https://deb.nodesource.com/setup_12.x | bash \
     && apt-get install nodejs -yq \
     && curl -L https://npmjs.org/install.sh | bash
 
