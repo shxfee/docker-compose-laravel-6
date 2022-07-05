@@ -10,15 +10,22 @@ What's Included?
 
 The environment is composed with the following services -
 
-- PHP 7.2 with fpm
+- PHP 7.3 with fpm
     - All common dependencies for Laravel application
     - [Composer]
     - nodejs and npm for [Vue.js] and [Laravel-Mix]
-    - ImageMagick + ghostscript (default) or gd (require uncommenting) for image operations
+    - gd (default) (ImageMagick + ghostscript  require uncommenting) for image operations
 - [Nginx] - Web server
 - [MariaDB] 10.2 - Database (drop-in replacement for MySQL with performance, stability, and openness)
 - [Adminer] - Light-weight database management frontend
 - [MailHog] - Receive emails for dev environment (Web and API based SMTP service)
+
+Install PHP Extensions
+----------------------
+
+Refer to the following repository for details
+https://github.com/mlocati/docker-php-extension-installer
+
 
 How to use
 ------------------
@@ -29,7 +36,7 @@ Otherwise, following the steps may not be easy for you.
 #### 1. Clone this repository 
 You can clone it anywhere in your local machine or download as zip file.
 ```shell script
-git clone https://github.com/ajaxray/docker-compose-laravel.git /tmp/docker-compose-laravel  
+git clone https://github.com/shxfee/docker-compose-laravel-6
 ```
 
 > If you want to try with fresh Laravel project, check "Starting with fresh Laravel" below in Notes section before proceeding to the next step.
@@ -38,7 +45,7 @@ git clone https://github.com/ajaxray/docker-compose-laravel.git /tmp/docker-comp
 
 Now, copy `docker-compose.yml` file and `docker` directory to project root of your laravel application.
 ```shell script
-cp -vr /tmp/docker-compose-laravel/docker* /path/to/my-project/
+cp -vr /tmp/docker-compose-laravel-6/docker* /path/to/my-project/
 cd /path/to/my-project/
 ```
 
