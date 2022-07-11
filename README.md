@@ -36,7 +36,7 @@ Otherwise, following the steps may not be easy for you.
 #### 1. Clone this repository 
 You can clone it anywhere in your local machine or download as zip file.
 ```shell script
-git clone https://github.com/shxfee/docker-compose-laravel-6
+git clone https://github.com/shxfee/docker-compose-laravel-6 /tmp/docker-compose-laravel-6
 ```
 
 > If you want to try with fresh Laravel project, check "Starting with fresh Laravel" below in Notes section before proceeding to the next step.
